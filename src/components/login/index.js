@@ -1,5 +1,5 @@
 import appConfig from "common/utils/config";
-import actions from "./actions.service";
+import actions from "./login.actions";
 import styles from "./login.less";
 
 const resolve = appConfig.routerResolve;
