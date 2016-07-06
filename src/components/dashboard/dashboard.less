@@ -1,0 +1,28 @@
+.row {
+  composes: row from 'common/utils/grid.css';
+}
+
+.col {
+  composes: col from 'common/utils/grid.css';
+}
+
+.sidebar {
+  composes: col from 'common/utils/grid.css';
+  width: 280px;
+  background-color: #323232;
+}
+
+.wrapper {
+  composes: row;
+  height: 100vh;
+}
+
+.content {
+  composes: col;
+  vertical-align: top;
+  padding-top: 5rem;
+}
+
+.feature {
+  border: 2px solid blue;
+}

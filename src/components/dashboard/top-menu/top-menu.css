@@ -1,0 +1,53 @@
+.profile-image  {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+/* Navbar */
+
+.navbar-default {
+    z-index: 5 !important;
+    left: 280px;
+
+    box-sizing: border-box;
+    margin: 0 !important;
+    padding: 0 2.5rem;
+
+    border: 0 !important;
+    border-radius: 0;
+    background-color: #fff;
+}
+
+.navbar-default .navbar-nav > li > a {
+    text-decoration: underline;
+    color: #3087B4 !important;
+    border: 0 !important;
+}
+.navbar-default .navbar-nav > li:hover > a:hover {
+    background-color: rgba(231, 231, 231, .25);
+}
+
+.navbar-default .navbar-nav > li.dropdown > a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    text-decoration: none;
+}
+
+.navbar-default .navbar-nav > li:hover > a:hover {
+    color: #00A4EA !important;
+}
+
+.navbar-default .navbar-nav > li.dropdown > a:hover,
+.navbar-default .navbar-nav > li.dropdown:hover > a,
+.navbar-default .navbar-nav > li.dropdown:hover > a:hover,
+.navbar-default .navbar-nav > li.dropdown:hover > a:focus {
+    color: #00A4EA;
+    background-color: rgba(231, 231, 231, .25);
+}
+li.dropdown:hover > .dropdown-menu {
+    display: block;
+}
+.right-space {
+    margin-right: .5rem;
+}
