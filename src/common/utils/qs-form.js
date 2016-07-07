@@ -6,7 +6,7 @@ const read = () => {
 };
 
 const write = form => {
-  const path = form ? `${ window.location.href }?${ stringify(form) }` : window.location.href;
+  const path = form ? `${ window.location.origin }${ window.location.pathname }?${ stringify(form) }` : window.location.href;
   window.history.pushState({ path }, ' ', path);
 };
 

@@ -8,7 +8,8 @@ const template = `
           <div class="col-xs-9">
               <div class="radio" ng-repeat="item in $ctrl.types track by $index">
                   <label>
-                      <input type="radio" name="periodType" ng-checked="$ctrl._type === item.id"
+                      <input type="radio" name="periodType" 
+                             ng-checked="$ctrl._type === item.id"
                              ng-click="$ctrl._type = item.id">
                       <span ng-bind="item.title"></span>
                   </label>
@@ -32,6 +33,7 @@ class controller {
   
   $onInit() {
     this.actions.setDefaults();
+    this._type = this.actions.type || "last_week";
   }
   
   get types() {

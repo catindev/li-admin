@@ -5,7 +5,7 @@ import qsForm from "common/utils/qs-form";
 const notEqualPaths = (next, current) => next.$$route.originalPath !== current.$$route.originalPath;
 
 class controller {
-  
+
   constructor( commonActions, $timeout, $location, SearchSMSActions, $rootScope ) {
     this._rootScope = $rootScope;
     this._timeout = $timeout;
@@ -14,9 +14,8 @@ class controller {
     this.actions = SearchSMSActions;
     this.commonActions = commonActions;
   }
-  
-  $onInit() {
 
+  $onInit() {
     this.reported = false;
     this.fetching = false;
 
@@ -51,9 +50,10 @@ class controller {
   }
 
   requestReport() {
+    this.reset();
     qsForm.write( this.actions.form );
   }
-  
+
   setAsFraud({ items }) {
     this.fetching = true;
 
@@ -63,7 +63,7 @@ class controller {
         this.fetching = false;
       });
   }
-  
+
   reset() {
     this._location.search({});
     this.actions.report = null;

@@ -34,10 +34,6 @@
     </table>
     <hr>
     <div ng-hide="$ctrl.reported" style="text-align: center;">
-        <button class="btn btn-primary" style="margin-right: 1rem" ng-click="$ctrl.onReset()">
-            <span class="glyphicon glyphicon-remove"></span>
-            Очистить форму и начать новый поиск
-        </button>
         <button class="btn btn-default" ng-disabled="$ctrl.notSelected" ng-click="$ctrl.callAction()">
             <span class="glyphicon glyphicon-ok"></span>
             Перевести выбранные во фрод

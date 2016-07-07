@@ -2,7 +2,7 @@
     <loader-layout ng-if="$ctrl.fetching"></loader-layout>
 
     <form class="form-horizontal" role="form">
-        <fieldset ng-if="!$ctrl.fetching && !$ctrl.report">
+        <fieldset>
             <legend>Настройки поиска</legend>
 
             <ss-keywords-input></ss-keywords-input>
@@ -12,7 +12,7 @@
             <ss-period></ss-period>
         </fieldset>
 
-        <div ng-hide="$ctrl.fetching || $ctrl.report" class="form-group">
+        <div class="form-group">
             <div class="col-xs-3"></div>
             <div class="col-xs-9">
                 <button class="btn btn-primary" style="min-width: 200px"
@@ -35,10 +35,6 @@
         <!--TODO: component-->
         <div ng-if="$ctrl.file">
             <div style="text-align: center;">
-                <button class="btn btn-primary" style="margin-right: 1rem" ng-click="$ctrl.reset()">
-                    <span class="glyphicon glyphicon-remove"></span>
-                    Очистить форму и начать новый поиск
-                </button>
                 <button class="btn btn-default" ng-click="$ctrl.download()">
                     <span class="glyphicon glyphicon-download-alt"></span>
                     Скачать отчёт в формате csv

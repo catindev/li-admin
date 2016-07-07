@@ -46,6 +46,7 @@ export default angular
     require('./header').default,
     require('./main-menu').default,
     require('./other-page').default,
+    require('common/loader-layout').default,
 
     // Features
     require('./features/search-sms').default,

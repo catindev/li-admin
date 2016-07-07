@@ -6,7 +6,6 @@ const form = appState.select([ 'forms', 'searchSMS' ]);
 
 class SearchSMSActions {
 
-  // TODO: move all appStates to global
   constructor( $http, $q, $timeout ) {
     this._http = $http;
     this._q = $q;
@@ -21,7 +20,7 @@ class SearchSMSActions {
   }
 
   get form() { return form.get(); }
-  set form( appState ) { form.set( appState ); }
+  set form( state ) { form.set( state ); }
 
   // TODO: error handler
   searchSMS() {
