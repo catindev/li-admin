@@ -1,4 +1,5 @@
 import styles from "./sidebar.less";
+import actions from "./sidebar.actions";
 
 const template = `
     <div class="${ styles.wrapper }">
@@ -9,14 +10,32 @@ const template = `
             </a>
         </div>
     
-        <side-menu items="$ctrl.state"></side-menu>
+        <sidemenu items="$ctrl.menu"></sidemenu>
     </div>
 `;
 
+class controller {
+
+  constructor( sidebarActions ) {
+    this.actions = sidebarActions;
+  }
+
+  $onInit() {
+    this.actions.setState( this.menu );
+  }
+
+  get state() { return this.actions.state; }
+}
+
+
 export default angular
 
-    .module( 'Sidebar Module', [])
+    .module( 'Sidebar Module', [
+      require('./sidemenu').default
+    ])
 
-    .component( 'sidebar', { bindings: { state: '<' }, template })
+    .service('sidebarActions', actions)
+
+    .component( 'sidebar', { bindings: { menu: '<' }, template, controller })
 
     .name;

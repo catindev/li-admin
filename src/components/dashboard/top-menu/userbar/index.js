@@ -22,31 +22,30 @@ const template = `
 
 
 class controller {
-    constructor () {
-        this.styles = styles;
-        this._hover = false;
-    }
+  
+  constructor() {
+    this.styles = styles;
+    this._hover = false;
+  }
 
-    get btnHover() {
-        if ( this._hover ) return styles.buttonHover;
-        return '';
-    }
+  get btnHover() {
+    return this._hover ? styles.buttonHover : '';
+  }
 
-    get textHover() {
-        if ( this._hover ) return styles.textHover;
-        return '';
-    }
+  get textHover() {
+    return this._hover ? styles.textHover : '';
+  }
 
-    get avatarSrc() {
-        return this.user.avatar ||
-            'https://cf.dropboxstatic.com/static/images/avatar/faceholder-32-vflKWtuU5.png';
-    }
+  get avatarSrc() {
+    const defaultAvatar = 'https://cf.dropboxstatic.com/static/images/avatar/faceholder-32-vflKWtuU5.png';
+    return this.user.avatar || defaultAvatar;
+  }
 }
 
 export default angular
 
-    .module( 'Userbar Module', [])
+  .module('Userbar Module', [])
 
-    .component( 'userbar', { bindings: { user: '<' }, controller, template })
+  .component('userbar', {bindings: { user: '<' }, controller, template})
 
-    .name;
+  .name;

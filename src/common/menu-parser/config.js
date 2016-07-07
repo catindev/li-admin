@@ -9,6 +9,7 @@ export default [
   {
     title: "Редактирование",
     id: "edit",
+    uri: '/edit',
     functions: [
       "blacklist",
       "prebox_ppc",
@@ -44,7 +45,7 @@ export default [
           {
             title: 'Ком. предложение',
             id: 'proposal',
-            uri: '/finance/proposal',
+            uri: '/finance/tariff/proposal',
             endpoints: [
               { endpoint: 'bulk/tariff', methods: [ 'GET' ] },
             ]
@@ -53,7 +54,7 @@ export default [
           {
             title: 'Тарифы партнёра',
             id: 'price',
-            uri: '/finance/price',
+            uri: '/finance/tariff/price',
             endpoints: [
               { endpoint: 'bulk/tariff', methods: [ 'GET' ] },
             ]
@@ -77,6 +78,7 @@ export default [
   {
     title: "Поиск",
     id: "search",
+    uri: "/search",
     features: [
       {
         title: 'Поиск по текстам СМС',
@@ -101,6 +103,7 @@ export default [
   {
     title: "Статистика",
     id: "stats",
+    uri: "/stats",
     features: [
     
       {
@@ -132,6 +135,7 @@ export default [
   {
     title: "Мониторинг",
     id: "monitoring",
+    uri: "/monitoring",
     functions: [
       "send_sms",
       "statistics_alerter_whitelist",
@@ -145,6 +149,7 @@ export default [
   {
     title: "SMS-шлюз",
     id: "sms",
+    uri: "/sms",
     functions: [
       "kannel_1",
       "kannel_2",
@@ -165,6 +170,7 @@ export default [
   {
     title: "Платформа рассылок",
     id: "mplatform",
+    uri: "/mplatform",
     functions: [
       "listbalances",
       "alpha_titles",
@@ -175,6 +181,7 @@ export default [
   {
     title: "Старое",
     id: "deprecated",
+    uri: "/deprecated",
     functions: [
       "fraud_after_autocall",
       "frod",
