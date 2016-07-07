@@ -5,17 +5,19 @@ class SidemenuActions {
   
   
   get category() {
-    return menu.get().category;
+    let { category } = menu.get() || {};
+    return category;
   }
 
-  set category(value) {
+  set category( value ) {
     menu.merge({
       category: value, item: null, subitem: null
     });
   }
 
   get item() {
-    return menu.get().item;
+    let { item } = menu.get() || {};
+    return item;
   }
 
   set item(value) {
@@ -23,15 +25,17 @@ class SidemenuActions {
   }
 
   get subitem() {
-    return menu.get().subitem;
+    let { subitem } = menu.get() || {};
+    return subitem;
   }
 
-  set subitem(value) {
+  set subitem( value ) {
     return menu.set('subitem', value);
   }
 
   isActive(type, id) {
-    return menu.get()[type] === id;
+    let _menu = menu.get();
+    return _menu ? _menu[type] === id : null;
   }
 
 }

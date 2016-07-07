@@ -22,10 +22,11 @@ const template = `
 
 
 class controller {
-  
-  constructor() {
+
+  constructor( commonActions ) {
     this.styles = styles;
     this._hover = false;
+    this.actions = commonActions;
   }
 
   get btnHover() {
@@ -40,6 +41,11 @@ class controller {
     const defaultAvatar = 'https://cf.dropboxstatic.com/static/images/avatar/faceholder-32-vflKWtuU5.png';
     return this.user.avatar || defaultAvatar;
   }
+
+  logout() {
+    this.actions.logout();
+  }
+
 }
 
 export default angular

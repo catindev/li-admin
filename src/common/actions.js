@@ -38,6 +38,7 @@ class CommonActions {
         appState.set('accessToken', access_token);
         appState.select('loginForm').unset();
         this.$location.path('/home');
+        return { error: null }
       })
       .catch(error => ({error: error.data.message}));
   }
@@ -58,8 +59,8 @@ class CommonActions {
     }
 
     return this.$q.all({
-      user: this.fetchUser(),
-      menu: this.fetchMenu()
+      user: this.fetchUser( accessToken ),
+      menu: this.fetchMenu( accessToken )
     }).then(values => values);
   }
 
@@ -69,15 +70,16 @@ class CommonActions {
       `${ appConfig.apiURL }/v1/logout?access_token=${ accessToken }`
     )
       .then(() => {
-        appState.unset();
         jsCookies.remove('sid');
         this.$location.path('/');
+        appState.unset();
       });
   }
 
 
-  fetchUser() {
-    let {accessToken, user} = appState.get();
+  fetchUser( accessToken ) {
+    if ( !accessToken ) return;
+    let { user } = appState.get();
     if (user) return this.$q.when(user);
 
     return this.$http.get(
@@ -88,8 +90,9 @@ class CommonActions {
     }).catch(error => console.error("Can't fetch user", error));
   }
 
-  fetchMenu() {
-    let {accessToken, menu} = appState.get();
+  fetchMenu( accessToken ) {
+    if ( !accessToken ) return;
+    let { menu } = appState.get();
     if (menu) return this.$q.when(menu);
 
     return this.$http.get(
