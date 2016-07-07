@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --config webpack.dev.js --content-base src/ --hot --history-api-fallback --inline --progress --port 8081",
+    "stage": "rm -rf public && webpack --config webpack.stage.js",
     "prod": "rm -rf public && webpack --config webpack.config.js",
     "lint": "eslint ."
   },
