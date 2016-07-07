@@ -88,7 +88,7 @@ module.exports = {
 			'[name].[hash].css', { allChunks: true }
 		),
 		new webpack.optimize.UglifyJsPlugin({
-			sourceMap: false,
+			sourceMap: true,
 			mangle: false,
 			compress: {
 				warnings: true,
