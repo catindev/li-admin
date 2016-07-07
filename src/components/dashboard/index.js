@@ -1,4 +1,5 @@
 import appConfig from "common/utils/config";
+import actions from "./dashboard.actions";
 import styles from "./dashboard.less";
 
 const resolve = appConfig.routerResolve;
@@ -12,7 +13,7 @@ const template = `
         <top-menu state="$ctrl.state.user"></top-menu>
       
         <div class="${ styles.row, styles.padding }">
-           <dashboard-header menu="$ctrl.state.menu"></dashboard-header>
+           <dashboard-header state="$ctrl.header"></dashboard-header>
         </div>
        
         <div class="${ styles.row }">
@@ -22,19 +23,38 @@ const template = `
 </div>
 `;
 
+
+class controller {
+
+  constructor( dashboardActions ) {
+    this.actions = dashboardActions;
+  }
+
+  $onInit() {
+    this.actions.setPageState( this.state.menu );
+  }
+
+  get header() { return this.actions.headerState; }
+}
+
+
 export default angular
 
   .module('Dashboard module', [
     require('./sidebar').default,
     require('./top-menu').default,
     require('./header').default,
-    require('./main-menu').default
+    require('./main-menu').default,
+    require('./other-page').default
   ])
 
+  .service('dashboardActions', actions)
+  
   .component('dashboard', {
     bindings: { state: '<' },
     transclude: true,
-    template
+    template,
+    controller
   })
 
   .config($routeProvider => $routeProvider.when(
@@ -51,7 +71,9 @@ export default angular
 
   .config($routeProvider => $routeProvider.otherwise({
     template: `
-        <dashboard state="$resolve.state"></dashboard>
+        <dashboard state="$resolve.state">
+            <other-page></other-page>
+        </dashboard>
       `,
     resolve
   }))

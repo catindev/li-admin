@@ -12,16 +12,12 @@ class SidebarActions {
   setState() {
     let { status } = appState.select('header').get();
     if (status === 404) return;
-
+    
     const path = pathToArray( this.$location.path() );
     let state = { category: path[0] };
     path.length >= 2 && ( state.item = path[1] );
     path.length >= 3 && ( state.subitem = path[2] );
     appState.set('sidemenu', state);
-  }
-
-  get state() {
-    return appState.select( 'sidemenu' ).get();
   }
 }
 

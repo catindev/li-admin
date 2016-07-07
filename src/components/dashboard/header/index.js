@@ -1,5 +1,4 @@
 import styles from './header.less';
-import actions from './header.actions';
 
 const template = `
   <div class="row">
@@ -22,26 +21,10 @@ const template = `
   </div>
 `;
 
-class controller {
-  
-  constructor( headerActions ) {
-    this.actions = headerActions;
-  }
-
-  $onInit() {
-    this.actions.setState( this.menu );
-  }
-
-  get state() { return this.actions.state; }
-}
-
-
 export default angular
   
   .module('Dashboard Header Module', [])
 
-  .service('headerActions', actions)
-
-  .component('dashboardHeader', { bindings: { menu: '<' }, template, controller })
+  .component('dashboardHeader', { bindings: { state: '<' }, template })
   
   .name;

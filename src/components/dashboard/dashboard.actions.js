@@ -2,15 +2,15 @@ import appState from "common/state";
 import { find } from "lodash";
 import pathToArray from "common/utils/path-to-array";
 
-class HeaderActions {
+class DashboardActions {
 
   constructor( $location ) {
     this.$location = $location;
 
-    console.info('Header Actions Service constructed');
+    console.info('Dashboard Actions Service constructed');
   }
-  
-  setState( menu ) {
+
+  setPageState( menu ) {
     if ( this.$location.path() === '/home' ) {
       appState.set('header', { status: 'OK', title: 'Панель управления' });
       return;
@@ -22,16 +22,18 @@ class HeaderActions {
       return;
     }
 
-    let breadcrumbs = [], status = 'OK', title;
+    let submenu, breadcrumbs = [], status = 'OK', title;
 
     const category = find( menu, { id: path[0] });
     if ( category ) {
+      submenu = category.features;
       breadcrumbs.push({ title: category.title, url: category.id });
       title = category.title;
 
       if ( path.length >= 2 ) {
         const item = find( category.features, { id: path[1] });
         if ( item ) {
+          submenu = item.features;
           breadcrumbs.push({ title: item.title, url: `${ category.id }/${ item.id }` });
           title = item.title;
 
@@ -39,6 +41,7 @@ class HeaderActions {
             const subitem = find( item.features, { id: path[2] });
 
             if ( subitem ) {
+              submenu = null;
               breadcrumbs.push({ title: subitem.title });
               title = subitem.title;
             } else status = 404;
@@ -47,14 +50,19 @@ class HeaderActions {
       }
     } else status = 404;
 
-    status === 404 && ( breadcrumbs = false, title = 'Страница не найдена' );
+    if ( status === 404 ) {
+      breadcrumbs = false;
+      submenu = null;
+      title = 'Страница не найдена';
+    }
 
     appState.set('header', { status, title, breadcrumbs  });
+    appState.set('submenu', submenu);
   }
 
-  get state() {
+  get headerState() {
     return appState.select( 'header' ).get();
   }
 }
 
-export default HeaderActions;
+export default DashboardActions;
