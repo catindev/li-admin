@@ -12,11 +12,16 @@ class HeaderActions {
   
   setState( menu ) {
     if ( this.$location.path() === '/home' ) {
-      appState.set('header', { title: 'Панель управления' });
+      appState.set('header', { status: 'OK', title: 'Панель управления' });
       return;
     }
 
     const path = pathToArray( this.$location.path() );
+    if ( path.length > 3 ) {
+      appState.set('header', { status: 404, title: 'Страница не найдена' });
+      return;
+    }
+
     let breadcrumbs = [], status = 'OK', title;
 
     const category = find( menu, { id: path[0] });
