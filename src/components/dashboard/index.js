@@ -45,7 +45,10 @@ export default angular
     require('./top-menu').default,
     require('./header').default,
     require('./main-menu').default,
-    require('./other-page').default
+    require('./other-page').default,
+
+    // Features
+    require('./features/search-sms').default,
   ])
 
   .service('dashboardActions', actions)
@@ -68,14 +71,5 @@ export default angular
       resolve
     }
   ))
-
-  .config($routeProvider => $routeProvider.otherwise({
-    template: `
-        <dashboard state="$resolve.state">
-            <other-page></other-page>
-        </dashboard>
-      `,
-    resolve
-  }))
 
   .name;

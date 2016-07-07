@@ -1,0 +1,9 @@
+<div ng-class="::$ctrl.styles.component">
+    <span ng-class="::$ctrl.styles.item" ng-repeat="item in $ctrl.items track by $index">
+        <a ng-class="::$ctrl.styles.link"
+           ng-click="$ctrl.removeItem($index)">
+                <span ng-class="::$ctrl.styles.text" ng-bind="item"></span>
+                <span ng-class="::$ctrl.styles.text">[×]</span>
+        </a>
+    </span>
+</div>

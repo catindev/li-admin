@@ -1,0 +1,49 @@
+<div class="g-feature col-sm-offset-1 col-sm-10">
+    <loader-layout ng-if="$ctrl.fetching"></loader-layout>
+
+    <form class="form-horizontal" role="form">
+        <fieldset ng-if="!$ctrl.fetching && !$ctrl.report">
+            <legend>Настройки поиска</legend>
+
+            <ss-keywords-input></ss-keywords-input>
+
+            <ss-exclude-idp></ss-exclude-idp>
+
+            <ss-period></ss-period>
+        </fieldset>
+
+        <div ng-hide="$ctrl.fetching || $ctrl.report" class="form-group">
+            <div class="col-xs-3"></div>
+            <div class="col-xs-9">
+                <button class="btn btn-primary" style="min-width: 200px"
+                        ng-disabled="!$ctrl.isValidForm()"
+                        ng-click="$ctrl.requestReport()">
+                    <span class="glyphicon glyphicon-search"></span>
+                    Найти сообщения
+                </button>
+            </div>
+        </div>
+
+        <div ng-if="$ctrl.report">
+            <legend>Отчёт</legend>
+            <ss-report data="$ctrl.report"
+                       on-reset="$ctrl.reset()"
+                       on-update="$ctrl.setAsFraud($event)">
+            </ss-report>
+        </div>
+
+        <!--TODO: component-->
+        <div ng-if="$ctrl.file">
+            <div style="text-align: center;">
+                <button class="btn btn-primary" style="margin-right: 1rem" ng-click="$ctrl.reset()">
+                    <span class="glyphicon glyphicon-remove"></span>
+                    Очистить форму и начать новый поиск
+                </button>
+                <button class="btn btn-default" ng-click="$ctrl.download()">
+                    <span class="glyphicon glyphicon-download-alt"></span>
+                    Скачать отчёт в формате csv
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

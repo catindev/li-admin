@@ -1,0 +1,46 @@
+<div>
+    <div ng-if="$ctrl.data.length === 0" ng-class="$ctrl.styles.message">
+        Не удалось составить отчёт :( Нет данных.
+    </div>
+    <table ng-if="$ctrl.data.length > 0" class="table">
+        <thead>
+            <tr>
+                <th ng-hide="$ctrl.reported">
+                    <input type="checkbox" ng-model="$ctrl._selectAll" ng-click="$ctrl.selectAll()"/>
+                </th>
+                <th>Дата и время</th>
+                <th>Номер абонента</th>
+                <th>Страна</th>
+                <th ng-class="::$ctrl.styles.right">Короткий номер</th>
+                <th ng-class="::$ctrl.styles.right">Текст запроса</th>
+                <th ng-class="::$ctrl.styles.right">Текст ответа</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="report in $ctrl.data track by $index"
+                ng-class="[ $ctrl.styles.item, $ctrl.isSelected($index) ]"
+                ng-click="$ctrl.select($index)">
+                <td ng-hide="$ctrl.reported">
+                    <input type="checkbox" ng-model="report.selected" ng-click="$event.stopPropagation()"/>
+                </td>
+                <td ng-bind="report.date"></td>
+                <td ng-bind="report.customer_number"></td>
+                <td ng-bind="report.country"></td>
+                <td ng-class="::$ctrl.styles.right" ng-bind="report.short_number"></td>
+                <td ng-class="::$ctrl.styles.right" ng-bind="report.request_message"></td>
+                <td ng-class="::$ctrl.styles.right" ng-bind="report.answer_message"></td>
+            </tr>
+        </tbody>
+    </table>
+    <hr>
+    <div ng-hide="$ctrl.reported" style="text-align: center;">
+        <button class="btn btn-primary" style="margin-right: 1rem" ng-click="$ctrl.onReset()">
+            <span class="glyphicon glyphicon-remove"></span>
+            Очистить форму и начать новый поиск
+        </button>
+        <button class="btn btn-default" ng-disabled="$ctrl.notSelected" ng-click="$ctrl.callAction()">
+            <span class="glyphicon glyphicon-ok"></span>
+            Перевести выбранные во фрод
+        </button>
+    </div>
+</div>

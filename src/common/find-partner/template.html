@@ -1,0 +1,21 @@
+<div ng-class="styles.component">
+    <input type="text" class="form-control"
+           ng-model="inputModel"
+           ng-focus="onInputFocus()"
+           ng-blur="onInputBlur($event)"
+           ng-model-options="{ debounce: 350 }"
+    />
+
+    <ul ng-if="items" ng-class="styles.list" ng-show="isShowItems"
+        ng-focus="onInputFocus()"
+        end-of-scroll="loadMore()">
+        <li ng-repeat="item in items track by $index"
+            ng-class="styles.item"
+            ng-click="onItemSelect(item)"
+            ng-mousedown="onItemPress()"
+        >
+            <span ng-class="styles.title_pid" title="{{ item.id }}">{{ item.id }}</span>
+            <span ng-class="styles.title_partner" title="{{ item.title }}">{{ item.title }}</span>
+        </li>
+    </ul>
+</div>

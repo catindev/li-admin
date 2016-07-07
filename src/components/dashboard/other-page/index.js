@@ -1,6 +1,9 @@
 import appState from "common/state";
 import styles from './other-page.less';
 
+import appConfig from "common/utils/config";
+const resolve = appConfig.routerResolve;
+
 const template = `
   <div>
       <div ng-if="$ctrl.items" class="${ styles.component }">
@@ -37,5 +40,14 @@ export default angular
   .module('Submenu Module', [])
   
   .component('otherPage', { template, controller })
-  
+
+  .config($routeProvider => $routeProvider.otherwise({
+    template: `
+        <dashboard state="$resolve.state">
+            <other-page></other-page>
+        </dashboard>
+      `,
+    resolve
+  }))
+
   .name;
