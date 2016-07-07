@@ -1,4 +1,4 @@
-import actions from './actions';
+import actions from './period.actions';
 import periodForm from "./form";
 
 const template = `
@@ -17,7 +17,7 @@ const template = `
           </div>
       </div>
   
-      <div ng-if="$ctrl._type === 'custom'">
+      <div ng-show="$ctrl._type === 'custom'">
           <ss-period-form start="$ctrl._periodStart" end="$ctrl._periodEnd"
                           on-change="$ctrl.changePeriod($event)">
           </ss-period-form>

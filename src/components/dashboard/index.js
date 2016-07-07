@@ -5,7 +5,7 @@ import styles from "./dashboard.less";
 const resolve = appConfig.routerResolve;
 
 const template = `
-<div class="${ styles.wrapper }">
+<div class="${ styles.wrapper }" full-window-heigh>
     <div class="${ styles.sidebar }">
         <sidebar menu="$ctrl.state.menu"></sidebar>
     </div>
@@ -47,9 +47,11 @@ export default angular
     require('./main-menu').default,
     require('./other-page').default,
     require('common/loader-layout').default,
+    require('common/full-win-height').default,
 
     // Features
     require('./features/search-sms').default,
+    require('./features/fraud-reports').default,
   ])
 
   .service('dashboardActions', actions)

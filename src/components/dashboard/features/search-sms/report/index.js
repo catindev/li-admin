@@ -1,5 +1,5 @@
-import template from "./template.html";
-import styles from "./styles.less";
+import template from "./report.html";
+import styles from "./report.less";
 
 const bindings = { data: '<', onReset: '&', onUpdate: '&' };
 

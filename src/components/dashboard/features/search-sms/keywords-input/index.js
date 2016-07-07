@@ -1,4 +1,4 @@
-import actions from './actions';
+import actions from './keywords-actions.actions';
 
 const template = `
   <div class="form-group">

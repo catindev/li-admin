@@ -1,0 +1,31 @@
+<div parent-scroll="page-content">
+    <div ng-if="$ctrl.data.length === 0"
+         ng-class="$ctrl.styles.message">
+        Не удалось составить отчёт :( Нет данных.
+    </div>
+    <table class="table" ng-if="$ctrl.data.length > 0">
+        <thead>
+        <tr>
+            <th>Партнёр</th>
+            <th>Менеджер</th>
+            <th ng-class="::$ctrl.styles.right">Всего fraud</th>
+            <th ng-class="::$ctrl.styles.right">Всего SMS</th>
+            <th ng-class="::$ctrl.styles.right">Файл с отчётом</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="report in $ctrl.data track by $index">
+            <td>
+                <strong>{{ report.partner.title }}</strong>
+                {{ ', idp' + (report.partner.id || '???') }}
+            </td>
+            <td ng-bind="report.manager || '-'"></td>
+            <td ng-bind="report.fraud || '-'" ng-class="::$ctrl.styles.right"></td>
+            <td ng-bind="report.sms  || '-'" ng-class="::$ctrl.styles.right"></td>
+            <td ng-class="::$ctrl.styles.right">
+                <a ng-href="{{ report.file }}" target="_blank">Скачать</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

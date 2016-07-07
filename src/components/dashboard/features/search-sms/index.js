@@ -1,5 +1,5 @@
-import actions from "./actions";
-import component from "./component";
+import actions from "./search-sms.actions";
+import component from "./search-sms.component";
 
 import appConfig from "common/utils/config";
 const resolve = appConfig.routerResolve;
@@ -12,7 +12,6 @@ export default angular
     , require('./keywords-input').default
     , require('./exclude-idp').default
     , require('./period').default
-    , require('./disabled-form').default
     , require('common/find-partner').default
   ])
   

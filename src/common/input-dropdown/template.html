@@ -1,0 +1,29 @@
+<div ng-class="styles.component"
+     ng-keydown="onKeyDownPress($event)"
+     ng-keypress="onKeyDownPress($event)">
+    <input type="text"
+           class="{{classes}}"
+           name="{{name}}"
+           placeholder="{{placeholder}}"
+           ng-model="inputValue"
+           ng-required="inputRequired"
+           ng-change="inputChange(inputValue)"
+           ng-focus="inputFocus()"
+           ng-blur="inputBlur($event)"
+           ng-model-options="opts"
+    >
+    <ul ng-show="dropdownVisible && !emptyFilter && dropdownItems"
+        ng-class="styles.list"
+        end-of-scroll="infinityScroll()">
+        <li ng-repeat="item in dropdownItems track by $index"
+            ng-click="selectItem(item)"
+            ng-mouseenter="setActive($index)"
+            ng-mousedown="dropdownPressed()"
+            ng-class="[styles.item, isActive($index)]"
+            class="toe"
+        >
+            <span ng-if="item.title" ng-bind="item.title"></span>
+            <span ng-if="!item.title" ng-bind="item"></span>
+        </li>
+    </ul>
+</div>

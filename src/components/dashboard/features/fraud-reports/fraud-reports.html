@@ -1,0 +1,139 @@
+<div>
+
+    <div class="g-feature col-sm-offset-1 col-sm-10">
+
+        <loader-layout ng-if="$ctrl.fetching"></loader-layout>
+
+        <form class="form-horizontal" role="form">
+            <fieldset ng-disabled="$ctrl.fetching" class="">
+                <legend style="margin-top: 0;">
+                    Параметры поиска
+                </legend>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="frod_id">
+                        Партнёр
+                    </label>
+                    <div class="col-sm-8">
+                        <find-partner
+                                on-select="$ctrl.selectPartner(partner)">
+                        </find-partner>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-xs-3 control-label">
+                        Год
+                    </label>
+                    <div class="col-xs-9">
+                        <div class="radio"
+                             ng-repeat="year in $ctrl.years track by $index">
+                            <label>
+                                <input
+                                        type="radio"
+                                        name="year"
+                                        ng-value="year"
+                                        ng-model="$ctrl._year"
+                                        ng-click="$ctrl.setForm({
+                                        key: 'year', value: $ctrl._year
+                                    })">
+                                {{ year }}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="frod_month">
+                        Месяц
+                    </label>
+                    <div class="col-sm-8">
+                        <input-dropdown
+                                placeholder="Выберите месяц"
+                                classes="form-control"
+                                items="$ctrl.months"
+                                filter="$ctrl.filterMonth(userInput)"
+                                on-select="$ctrl.onMonth(item)">
+                        </input-dropdown>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-xs-3 control-label">Тип</label>
+                    <div class="col-xs-9">
+                        <div class="radio"
+                             ng-repeat="type in $ctrl.types track by $index">
+                            <label>
+                                <input
+                                        type="radio"
+                                        name="type"
+                                        ng-value="type.id"
+                                        ng-model="$ctrl._type"
+                                        ng-click="$ctrl.setForm({
+                                        key: 'type', value: $ctrl._type
+                                    })">
+                                {{ type.title }}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="f_n">
+                        Список номеров
+                    </label>
+                    <div class="col-sm-8">
+                                <textarea
+                                        class="form-control" rows="7"
+                                        ng-model-options="$ctrl.opts"
+                                        ng-model="$ctrl._phone"
+                                        ng-change="$ctrl.setForm({
+                                        key: 'phone', value: $ctrl._phone
+                                    })"
+                                ></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-3"></label>
+                    <div class="col-sm-8">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"
+                                       ng-model="$ctrl._byCost"
+                                       ng-change="$ctrl.setForm({
+                                        key: 'by_cost', value: $ctrl._byCost
+                                   })">
+                                Отчёт по стоимости СМС
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <div ng-if="$ctrl.reports && !$ctrl.fetching">
+                <legend>Отчёт</legend>
+                <fraud-report data="$ctrl.reports"></fraud-report>
+            </div>
+
+        </form>
+    </div>
+
+
+    <div class="fixed-panel">
+        <div class="col-sm-offset-3" style="padding-left: 2rem;">
+            <button class="btn btn-primary"
+                    ng-if="!$ctrl.fetching"
+                    ng-disabled="!$ctrl.validate()"
+                    ng-click="$ctrl.createReport()">
+                Получить отчёт
+            </button>
+            <button ng-if="$ctrl.fetching" class="btn btn-primary"
+                    ng-click="$ctrl.dropRequest()">
+                <span class="glyphicon glyphicon-remove"></span>
+                Отменить запрос
+            </button>
+        </div>
+    </div>
+</div>
