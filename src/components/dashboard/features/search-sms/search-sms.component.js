@@ -1,5 +1,5 @@
 import template from "./template.html";
-import styles from "common/component.less";
+import styles from "common/utils/component.less";
 import qsForm from "common/utils/qs-form";
 
 const notEqualPaths = (next, current) => next.$$route.originalPath !== current.$$route.originalPath;

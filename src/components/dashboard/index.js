@@ -52,6 +52,7 @@ export default angular
     // Features
     require('./features/search-sms').default,
     require('./features/fraud-reports').default,
+    require('./features/tariffs').default,
   ])
 
   .service('dashboardActions', actions)

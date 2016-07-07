@@ -1,4 +1,4 @@
-import styles from "common/component.less";
+import styles from "common/utils/component.less";
 import months from "./months.js";
 import appConfig from "common/utils/config";
 import qsForm from "common/utils/qs-form";

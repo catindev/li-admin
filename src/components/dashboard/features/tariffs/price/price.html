@@ -1,0 +1,69 @@
+<div class="content-container-block col-sm-offset-1 col-sm-10">
+
+    <loader-layout ng-if="$ctrl.fetching"></loader-layout>
+
+    <form class="form-horizontal" role="form">
+        <fieldset>
+            <legend style="margin-top: 0;">
+                Партнёр
+            </legend>
+
+            <div class="form-group">
+                <label class="control-label col-sm-3" for="revenue">
+                    Выберите партнёра
+                </label>
+                <div class="col-sm-5">
+                    <find-partner on-select="$ctrl.onPartner(partner)">
+                    </find-partner>
+                </div>
+                <button class="btn btn-primary col-sm-3"
+                        ng-click="$ctrl.getPrice()"
+                        ng-disabled="!$ctrl.idp">
+                    Получить тарифы
+                </button>
+            </div>
+
+            <div class="alert alert-danger" style="text-align: center;" ng-if="$ctrl.error" ng-bind="$ctrl.error"></div>
+
+
+            <div ng-if="$ctrl.price" style="padding-bottom: 3rem;">
+                <legend>Договор</legend>
+                <div style="padding: 1.2rem 0;">
+                    <span class="col-sm-4">
+                        <strong>idp{{ $ctrl.partner.id }}</strong> {{ $ctrl.partner.title }}
+                    </span>
+                    <span class="col-sm-4">
+                        валюта по договору
+                        <strong ng-bind="$ctrl.partner.currency"></strong>
+                    </span>
+                    <span class="col-sm-4">
+                        международная валюта
+                        <strong ng-bind="$ctrl.partner.int_currency"></strong>
+                    </span>
+                </div>
+            </div>
+
+            <div ng-if="$ctrl.price">
+                <legend>Выгрузка в эксель</legend>
+
+                <div style="text-align:center;">
+                    <button class="btn btn-primary"
+                            ng-if="!$ctrl.files.partner"
+                            ng-click="$ctrl.actions.download('partner')">
+                        Скачать для партнёра
+                    </button>
+
+                    <button class="btn btn-primary" style="margin-left:1rem;"
+                            ng-if="!$ctrl.files.internal"
+                            ng-click="$ctrl.actions.download('internal')">
+                        Скачать для внутреннего использования
+                    </button>
+                </div>
+            </div>
+
+            <div ng-if="$ctrl.price" style="padding-top: 2rem;">
+                <legend>Тарифы</legend>
+                <price-list state="$ctrl.price"></price-list>
+            </div>
+    </form>
+</div>

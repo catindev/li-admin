@@ -1,0 +1,49 @@
+<div class="content-container-block col-sm-offset-1 col-sm-10">
+
+    <loader-layout ng-if="$ctrl.fetching"></loader-layout>
+
+    <form class="form-horizontal" role="form">
+        <fieldset ng-disabled="$ctrl.fetching" class="">
+            <legend style="margin-top: 0;">
+                Расчёт маржи
+            </legend>
+
+            <div class="form-group">
+                <label class="control-label col-sm-4" for="revenue">
+                    Коэфициент прибыли
+                </label>
+                <div class="col-sm-4">
+                    <input type="number" class="form-control" id="revenue" ng-model="$ctrl._r">
+                </div>
+                <button class="btn btn-primary col-sm-3" ng-click="$ctrl.calc($ctrl._r)">
+                    <span ng-if="!$ctrl._r">Посчитать без наценок</span>
+                    <span ng-if="$ctrl._r">Посчитать</span>
+                </button>
+            </div>
+
+            <!--TODO: component?-->
+            <div ng-if="$ctrl.price">
+                <legend>Выгрузка в эксель</legend>
+
+                <div style="text-align:center;">
+                    <button class="btn btn-primary"
+                            ng-if="!$ctrl.files.partner"
+                            ng-click="$ctrl.actions.download('partner')">
+                        Скачать для партнёра
+                    </button>
+
+                    <button class="btn btn-primary" style="margin-left:1rem;"
+                            ng-if="!$ctrl.files.internal"
+                            ng-click="$ctrl.actions.download('internal')">
+                        Скачать для внутреннего использования
+                    </button>
+                </div>
+            </div>
+
+            <div ng-if="$ctrl.price" style="padding-top: 3rem;">
+                <legend>Тарифы</legend>
+                <price-list state="$ctrl.price"></price-list>
+            </div>
+
+    </form>
+</div>
