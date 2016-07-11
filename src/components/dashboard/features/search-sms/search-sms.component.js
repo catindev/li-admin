@@ -1,8 +1,7 @@
 import template from "./template.html";
 import styles from "common/utils/component.less";
 import qsForm from "common/utils/qs-form";
-
-const notEqualPaths = (next, current) => next.$$route.originalPath !== current.$$route.originalPath;
+import isCurrentURI from "common/utils/is-current-uri";
 
 class controller {
 
@@ -21,9 +20,8 @@ class controller {
 
     this.readQueryForm();
 
-    this._rootScope.$on(
-      "$routeChangeStart",
-      (event, next, current) => notEqualPaths(next, current) && this.reset()
+    this._rootScope.$on( "$routeChangeStart",
+      (event, next, current) => isCurrentURI(next, current) && this.reset()
     );
   }
 

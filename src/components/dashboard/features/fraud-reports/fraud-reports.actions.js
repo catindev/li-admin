@@ -9,20 +9,24 @@ class FraudActions {
     this._timeout = $q.defer();
   }
 
-  get form() { return form.get(); }
+  get form() {
+    return form.get();
+  }
 
   set form(data) {
     form.set(data.key, data.value);
   }
-  
-  rewriteForm( data ) { form.set( data ); }
+
+  rewriteForm(data) {
+    form.set(data);
+  }
 
   fraudReport() {
     let _form = form.get() || {},
       access_token = appState.select('accessToken').get();
 
-    let {partner_id, type, by_cost, phone, request_id} = _form,
-      phones = formData.fromArray('phone', phone),
+    let { partner_id, type, by_cost, phone, request_id } = _form;
+    let phones = formData.fromArray('phone', phone.split(/\r?\n/)),
       query = formData.fromJSON(
         Object.assign(
           {},
@@ -31,7 +35,16 @@ class FraudActions {
         )
       );
 
-    console.log('query', query);
+    const fraudError = data => {
+      if (!data) return data;
+      if (data.status === 0) console.info('fraud request cancelled');
+      if ('request_id' in data) {
+        form.set('request_id', data.request_id);
+      } else {
+        console.error('fraud request error', data);
+      }
+      return data;
+    };
 
     return this._http({
       method: 'POST',
@@ -40,17 +53,7 @@ class FraudActions {
       headers: formData.сontentType
     })
       .success(response => response)
-      .error(data => {
-        if (!data) return data;
-        if (data.status === 0) console.info('fraud request cancelled');
-        if ('request_id' in data) {
-          form.set('request_id', data.request_id);
-          console.info('async fraud request started');
-        } else {
-          console.error('fraud request error', data);
-        }
-        return data;
-      });
+      .error( fraudError );
   }
 
   dropRequest() {

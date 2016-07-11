@@ -33,8 +33,10 @@ class CommonActions {
 
     return this.$http({method: 'POST', url: `${ appConfig.apiURL }/v1/login?${ query }`})
       .then(response => {
-        let {access_token} = response.data;
-        jsCookies.set('sid', access_token, {expires});
+        let { access_token } = response.data;
+        console.log(':D trying to set', access_token)
+        jsCookies.set('sid', access_token, { expires });
+        console.log(':D setting', jsCookies.set('sid', access_token, { expires }));
         appState.set('accessToken', access_token);
         appState.select('loginForm').unset();
         this.$location.path('/home');

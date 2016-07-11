@@ -3,7 +3,7 @@ import initial from './initial';
 
 const logger = (previousState, newState, affectedPaths) => {
   console.groupCollapsed('State change:');
-  console.log('Affected paths', affectedPaths.map( path => path.join('/')));
+  console.log('Affected paths', affectedPaths.map( path => (path.join('/')).toString() ));
   console.log('New state', newState);
   console.log('Previous state', previousState);
   console.groupEnd();

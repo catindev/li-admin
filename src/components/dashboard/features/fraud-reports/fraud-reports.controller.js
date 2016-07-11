@@ -2,12 +2,12 @@ import styles from "common/utils/component.less";
 import months from "./months.js";
 import appConfig from "common/utils/config";
 import qsForm from "common/utils/qs-form";
-
+import notCurrentURI from "common/utils/is-current-uri";
 
 let intervalPromise;
 
 class Controller {
-  constructor( fraudActions, commonActions, $q, $interval, $timeout, $rootScope ) {
+  constructor( fraudActions, commonActions, $q, $interval, $timeout, $rootScope, $location ) {
     this.opts = appConfig.modelOptions;
     this._interval = $interval;
     this._timeout = $timeout;
@@ -17,40 +17,50 @@ class Controller {
     this.actions = fraudActions;
     this.commonActions = commonActions;
     this.styles = styles;
+
+    this.$location = $location;
   }
 
   $onInit() {
     this.years = [ '2016', '2015', '2014', '2013', '2012' ];
-    this._year = '2016';
-    this.actions.form = { key: 'year', value: '2016' };
-
     this.types = [
       { id: "all", title: "SMS и fraud" },
       { id: "sms", title: "Только SMS" },
       { id: "frod", title: "Только fraud" },
     ];
-    this._type = "all";
-    this.actions.form = { key: 'type', value: 'all' };
-
-
-    this.readQueryForm();
 
     this._rootScope.$on(
       "$routeChangeStart",
-      (event, next, current) => notEqualPaths(next, current) && (this.reports = null)
+      (event, next, current) => notCurrentURI(next, current) && (this.reports = null)
     );
+
+    const isForm = this.readQueryForm();
+    if ( isForm ) return;
+
+    this._year = '2016';
+    this.actions.form = { key: 'year', value: form.year || '2016' };
+    this._type = "all";
+    this.actions.form = { key: 'type', value: form.type || 'all' };
+  }
+
+  readQueryForm() {
+    const qs = qsForm.read();
+    if ( qs ) {
+      this.actions.rewriteForm( qs );
+      this.findFraud();
+
+      const form = this.actions.form;
+      this._year = form.year;
+      this._type = form.type;
+      this._phone = form.phone;
+      return true;
+    }
+    return false;
   }
 
 
   setForm( data ) {
-    if (data.key === 'phone') data.value = data.value.split(/\r?\n/);
     this.actions.form = data;
-  }
-
-  // Deprecated
-  onPartner( data ) {
-    let id = data.item ? data.item.id : null;
-    this.actions.form = { key: 'partner_id', value: id };
   }
   
   selectPartner( partner ) {
@@ -62,49 +72,26 @@ class Controller {
     this.actions.form = { key: 'month', value: id };
   }
   
-  readQueryForm() {
-    const qs = qsForm.read();
-    if ( qs ) {
-      this.actions.rewriteForm( qs );
-      this.findFraud();
-    }
-  }
-  
   createReport() {
     qsForm.write( this.actions.form );
-
-    this.reports = null;
-    this.fetching = true;
-
-    intervalPromise = this._interval(
-      () => {
-        this.actions.fraudReport()
-          .success(response => {
-              this.reports = response.items || [];
-              this.dropRequest();
-          })
-          .error(error => {
-              if ( !error.request_id ) this.dropRequest();
-          });
-      },
-      2000
-    );
   }
   
   findFraud() {
     this.reports = null;
     this.fetching = true;
 
+    this._interval.cancel( intervalPromise );
+
+    const fraudReportResponce = response => {
+      this.reports = response.items || [];
+      this.dropRequest();
+    };
+
     intervalPromise = this._interval(
       () => {
         this.actions.fraudReport()
-          .success(response => {
-            this.reports = response.items || [];
-            this.dropRequest();
-          })
-          .error(error => {
-            ( !error.request_id ) && this.dropRequest();
-          });
+          .success( fraudReportResponce )
+          .error(error => ( !error.request_id ) && this.dropRequest() );
       },
       2000
     );
@@ -113,6 +100,12 @@ class Controller {
   dropRequest() {
     this.fetching = false;
     this._interval.cancel( intervalPromise );
+    this.actions.dropRequest();
+  }
+
+  cancelRequest() {
+    this.$location.search({});
+    this.dropRequest();
     this.actions.dropRequest();
   }
 

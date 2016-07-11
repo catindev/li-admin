@@ -39,7 +39,8 @@ class controller {
 
   get avatarSrc() {
     const defaultAvatar = 'https://cf.dropboxstatic.com/static/images/avatar/faceholder-32-vflKWtuU5.png';
-    return this.user.avatar || defaultAvatar;
+    // return this.user.avatar || defaultAvatar;
+    return defaultAvatar;
   }
 
   logout() {
