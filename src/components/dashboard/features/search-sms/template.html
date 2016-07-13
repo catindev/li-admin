@@ -26,13 +26,11 @@
 
         <div ng-if="$ctrl.report">
             <legend>Отчёт</legend>
-            <ss-report data="$ctrl.report"
-                       on-reset="$ctrl.reset()"
+            <ss-report data="$ctrl.report" on-reset="$ctrl.reset()"
                        on-update="$ctrl.setAsFraud($event)">
             </ss-report>
         </div>
 
-        <!--TODO: component-->
         <div ng-if="$ctrl.file">
             <div style="text-align: center;">
                 <button class="btn btn-default" ng-click="$ctrl.download()">

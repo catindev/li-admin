@@ -17,7 +17,7 @@ const template = `
           </div>
       </div>
   
-      <div>
+      <div ng-if="$ctrl._type === 'custom'">
           <ss-period-form start="$ctrl._periodStart" end="$ctrl._periodEnd"
                           on-change="$ctrl.changePeriod($event)">
           </ss-period-form>

@@ -7,17 +7,17 @@ const template = `
       <legend>Период</legend>
       <fieldset>
           <ss-datepicker label="Начало"
-                         type="start"
-                         date="$ctrl.start"
-                         error="$ctrl.error.start"
-                         on-change="$ctrl.change($event)">
+               type="start"
+               date="$ctrl.start"
+               error="$ctrl.error.start"
+               on-change="$ctrl.change($event)">
           </ss-datepicker>
 
           <ss-datepicker label="Конец"
-                         type="end"
-                         date="$ctrl.end"
-                         error="$ctrl.error.end"
-                         on-change="$ctrl.change($event)">
+               type="end"
+               date="$ctrl.end"
+               error="$ctrl.error.end"
+               on-change="$ctrl.change($event)">
           </ss-datepicker>
       </fieldset>
   </div>

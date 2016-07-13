@@ -59,6 +59,7 @@ class Controller {
     return false;
   }
 
+  get form() { return this.actions.form; }
 
   setForm( data ) {
     this.actions.form = data;

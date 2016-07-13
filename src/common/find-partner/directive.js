@@ -7,7 +7,8 @@ const directive = {
   restrict: 'E',
   require: 'findPartner',
   scope: {
-    onSelect: '&'
+    onSelect: '&',
+    idp: '@'
   },
   template,
   controller,
