@@ -14,7 +14,8 @@ const directive = {
 		filter: '&',
 		onSelect: '&',
 		onChange: '&',
-		infinityScroll: '&'
+		infinityScroll: '&',
+    selectedId: '@'
 	},
 	template,
 	controller,

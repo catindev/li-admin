@@ -1,5 +1,6 @@
 import angular from 'angular';
 import styles from './styles.less';
+import { find } from "lodash";
 
 const MAX_HEIGH = 160;
 
@@ -35,7 +36,7 @@ const link = (scope, element, attrs) => {
 	let selectItem = item => {
 		scope.selectedItem = item;
 		hideDropdown();
-		if ( scope.onSelect ) scope.onSelect({item: item});
+		if ( scope.onSelect ) scope.onSelect({ item: item });
 	};
 
 	let dropdownPressed = () => pressedDropdown = true;
@@ -151,6 +152,12 @@ const link = (scope, element, attrs) => {
 	scope.$watch('dropdownItems', onDropdownItems);
 	scope.$watch('selectedItem', onSelectItem);
 	scope.$watch('items', newItems => scope.dropdownItems = newItems || []);
+
+  if ( scope.selectedId ) {
+    console.log(':D selectedId', scope.selectedId);
+    let item = find( scope.items, { id: scope.selectedId });
+    scope.inputValue = item.title;
+  }
 }
 
 export default link;
