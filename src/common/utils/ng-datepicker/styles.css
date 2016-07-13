@@ -206,3 +206,9 @@ datepicker, .datepicker, [datepicker],
     background: rgba(25,2,0,0.02);
     cursor: default;
 }
+
+/* my shit */
+
+._720kb-position-bottom {
+    bottom: 100%;
+}

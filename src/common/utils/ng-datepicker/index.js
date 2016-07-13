@@ -117,7 +117,7 @@
     , generateHtmlTemplate = function generateHtmlTemplate(prevButton, nextButton) {
 
       var toReturn = [
-        '<div class="_720kb-datepicker-calendar {{datepickerClass}} {{datepickerID}}" ng-class="{\'_720kb-datepicker-forced-to-open\': checkVisibility()}" ng-blur="hideCalendar()">',
+        '<div class="_720kb-datepicker-calendar {{datepickerClass}} {{datepickerID}}" ng-class="{\'_720kb-datepicker-forced-to-open\': checkVisibility(), \'_720kb-position-bottom\': position === \'bottom\' }" ng-blur="hideCalendar()">',
         '</div>'
       ]
       , monthAndYearHeader = generateMonthAndYearHeader(prevButton, nextButton)
@@ -822,12 +822,17 @@
           'datepickerAppendTo': '@',
           'datepickerToggle': '@',
           'datepickerClass': '@',
-          'datepickerShow': '@'
+          'datepickerShow': '@',
+          'position': '@'
         },
         'link': linkingFunction
       };
     };
 
-  angular.module('720kb.datepicker', [])
-               .directive('datepicker', ['$window', '$compile', '$locale', '$filter', '$interpolate', datepickerDirective]);
+  angular
+    .module('720kb.datepicker', [])
+    .directive(
+      'datepicker',
+      ['$window', '$compile', '$locale', '$filter', '$interpolate', datepickerDirective]
+    );
 }(angular, navigator));

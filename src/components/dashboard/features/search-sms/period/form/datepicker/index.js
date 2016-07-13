@@ -8,9 +8,8 @@ const template = `
   <div class="form-group" ng-class="{ 'has-error': $ctrl.error }">
       <label class="control-label col-sm-3" ng-bind="$ctrl.label"></label>
       <div class="col-xs-4">
-          <datepicker date-format="dd.MM.yyyy">
-              <input class="form-control" 
-                     ng-model="$ctrl.date" ng-change="$ctrl.change()" ng-blur="$ctrl.blur()"/>
+          <datepicker date-format="dd.MM.yyyy" position="bottom">
+              <input class="form-control" ng-model="$ctrl.date" ng-change="$ctrl.change()" ng-blur="$ctrl.blur()"/>
           </datepicker>
           <span class="sr-only">(error)</span>
           <span ng-if="$ctrl.error" class="help-block" ng-bind="$ctrl.error"></span>
