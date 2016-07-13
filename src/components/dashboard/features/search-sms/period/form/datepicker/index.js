@@ -1,5 +1,6 @@
-import "angularjs-datepicker";
-import "angularjs-datepicker/dist/angular-datepicker.min.css";
+import "common/utils/ng-datepicker";
+import "common/utils/ng-datepicker/styles.css";
+
 
 const bindings = { label: '@', date: '<', type: '@', error: '<', onChange: '&' };
 

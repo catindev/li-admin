@@ -38,9 +38,9 @@ class Controller {
     if ( isForm ) return;
 
     this._year = '2016';
-    this.actions.form = { key: 'year', value: form.year || '2016' };
+    this.actions.form = { key: 'year', value: '2016' };
     this._type = "all";
-    this.actions.form = { key: 'type', value: form.type || 'all' };
+    this.actions.form = { key: 'type', value: 'all' };
   }
 
   readQueryForm() {
@@ -53,6 +53,7 @@ class Controller {
       this._year = form.year;
       this._type = form.type;
       this._phone = form.phone;
+      this._byCost = form.by_cost === 'true';
       return true;
     }
     return false;
@@ -62,7 +63,7 @@ class Controller {
   setForm( data ) {
     this.actions.form = data;
   }
-  
+
   selectPartner( partner ) {
     this.actions.form = { key: 'partner_id', value: partner.id };
   }
