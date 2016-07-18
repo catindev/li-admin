@@ -47,7 +47,7 @@ export default [
             id: 'proposal',
             uri: '/finance/tariff/proposal',
             endpoints: [
-              { endpoint: 'bulk/tariff', methods: [ 'GET' ] },
+              { endpoint: 'bulk/tariff', method: "GET"  },
             ]
           },
 
@@ -56,7 +56,8 @@ export default [
             id: 'price',
             uri: '/finance/tariff/price',
             endpoints: [
-              { endpoint: 'bulk/tariff', methods: [ 'GET' ] },
+              { endpoint: 'bulk/tariff', method: "GET" },
+              { endpoint: 'partners', method: "GET" }
             ]
           }
 
@@ -85,7 +86,8 @@ export default [
         id: 'sms',
         uri: '/search/sms',
         endpoints: [
-          { endpoint: 'search/sms', methods: [ 'GET' ] },
+          { endpoint: 'search/sms', method: "GET" },
+          { endpoint: 'partners', method: "GET" }
         ]
       }
   
@@ -111,7 +113,8 @@ export default [
         id: 'fraud',
         uri: '/stats/fraud',
         endpoints: [
-          { endpoint: 'stats/fraud', methods: [ 'POST' ] },
+          { endpoint: 'partners/fraud', method: "POST" },
+          { endpoint: 'partners', method: "GET" },
         ]
       }
   

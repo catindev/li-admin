@@ -98,12 +98,13 @@ class CommonActions {
     if (menu) return this.$q.when(menu);
 
     return this.$http.get(
-      `${ appConfig.apiURL }/v1/features`,
-      {params: {access_token: accessToken}}
+      `${ appConfig.apiURL }/v1/access`,
+      { params: { access_token: accessToken } }
     )
       .then(response => {
         let accessInfo = response.data;
-        const menu = parseMenu(fakeAccess);
+        // const menu = parseMenu(fakeAccess);
+        const menu = parseMenu(accessInfo);
         appState.set('menu', menu);
         return menu;
       })

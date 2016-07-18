@@ -26,7 +26,7 @@ class Controller {
     this.types = [
       { id: "all", title: "SMS и fraud" },
       { id: "sms", title: "Только SMS" },
-      { id: "frod", title: "Только fraud" },
+      { id: "fraud", title: "Только fraud" },
     ];
 
     this._rootScope.$on(

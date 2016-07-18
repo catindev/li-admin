@@ -1,7 +1,7 @@
 import appState from "common/state";
 import appConfig from "common/utils/config";
 import formData from "common/utils/form-data";
-let form = appState.select(['forms', `partners_fraud`]);
+let form = appState.select([ 'forms', 'partners_fraud' ]);
 
 class FraudActions {
   constructor($http, $q) {

@@ -13,20 +13,13 @@ const checkSubFeatures = ( subcategory, response ) => {
 const checkEndpoints = ( feature, response ) => {
   let endpoints = feature.endpoints.filter(
     point => {
-      let endpoint = find( response,  { endpoint: `/${point.endpoint}` } );
-
+      let endpoint = find( response,  { endpoint: `/${ point.endpoint }` } );
       if ( !endpoint ) return false;
-      if ( endpoint.methods.length === 0 ) return true;
-
-      let methods = endpoint.methods.filter(
-        method => endpoint.methods.indexOf( method ) !== -1
-      );
-
-      return methods.length === endpoint.methods.length;
+      return endpoint.method === point.method;
     }
   );
   return endpoints.length === feature.endpoints.length;
-}
+};
 
 const checkFeatures = ( features, response ) => {
   let resultFeatures = [];

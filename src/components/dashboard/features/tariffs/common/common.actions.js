@@ -6,6 +6,7 @@ const formPrice = appState.select(['forms', `tariffPrice`]);
 const formProposal = appState.select(['forms', `tariffProposal`]);
 
 class PriceActions {
+
   constructor($http, $q, $window) {
     this.$http = $http;
     this.$timeout = $q.defer();
@@ -27,7 +28,7 @@ class PriceActions {
     return this.partner;
   }
 
-  requestPrices(query) {
+  requestPrices( query ) {
     this.files = null;
     this.price = null;
     this.partner = null;
