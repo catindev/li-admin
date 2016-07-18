@@ -103,8 +103,8 @@ class CommonActions {
     )
       .then(response => {
         let accessInfo = response.data;
-        // const menu = parseMenu(fakeAccess);
-        const menu = parseMenu(accessInfo);
+        // const menu = parseMenu( accessInfo );
+        const menu = parseMenu( fakeAccess );
         appState.set('menu', menu);
         return menu;
       })
