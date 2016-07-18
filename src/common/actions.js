@@ -85,7 +85,7 @@ class CommonActions {
     if (user) return this.$q.when(user);
 
     return this.$http.get(
-      `${ appConfig.apiURL }/v1/me`, {params: {access_token: accessToken}}
+      `${ appConfig.apiURL }/v1/me`, { params: { access_token: accessToken } }
     ).then(response => {
       appState.set('user', response.data);
       return response.data;
@@ -103,8 +103,8 @@ class CommonActions {
     )
       .then(response => {
         let accessInfo = response.data;
-        // const menu = parseMenu( accessInfo );
-        const menu = parseMenu( fakeAccess );
+        // const menu = parseMenu( fakeAccess );
+        const menu = parseMenu( accessInfo);
         appState.set('menu', menu);
         return menu;
       })

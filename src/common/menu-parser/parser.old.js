@@ -1,8 +1,7 @@
-import { find, remove, sortBy, has } from 'lodash';
+import { find, remove, sortBy, has, findIndex } from 'lodash';
 
-function parse( fe, be ) {
+function parse( menu, fe, be ) {
   let BE = be.filter(e => has(e, "endpoint") ? false : e);
-  let menu = [];
 
   fe.forEach(category => {
     let features = [];
@@ -18,7 +17,11 @@ function parse( fe, be ) {
     if ( features.length > 0 ) {
       features = sortBy( features, "title" );
       let { title, id } = category;
-      menu.push({ title, id, features });
+
+      const categoryIndex = findIndex( menu, { id });
+      if ( categoryIndex != -1 ){
+        menu[ categoryIndex ].features = menu[ categoryIndex ].features.concat(features);
+      } else menu.push({ title, id, features });
     }
     
   });
